@@ -1,16 +1,27 @@
+import java.util.Scanner;
 
 public class Tres {
 	public static void main(String[] args) {
-		CalculadoraDeTamanhoDeArquivo.valor = 10.0;
+		Tamanhos tamanhoUsadoTerminal = Tamanhos.MB;
+		Scanner terminal = new Scanner(System.in);
+		
+		System.out.print("Digite quantos MB seu arquivo possui: ");
+		CalculadoraTamanhos c = new CalculadoraTamanhos(terminal.nextDouble(), tamanhoUsadoTerminal);
+		System.out.printf("Tamanho do arquivo em B: %f\n", c.getValorEm(Tamanhos.B));
+		System.out.printf("Tamanho do arquivo em KB: %f\n", c.getValorEm(Tamanhos.KB));
+		System.out.printf("Tamanho do arquivo em MB: %f\n", c.getValorEm(Tamanhos.MB));
+		System.out.printf("Tamanho do arquivo em GB: %f\n", c.getValorEm(Tamanhos.GB));
+		System.out.printf("Tamanho do arquivo em TB: %f\n", c.getValorEm(Tamanhos.TB));
+		
+		terminal.close();
 	}
-
 }
 
-class CalculadoraDeTamanhoDeArquivo {
+class CalculadoraTamanhos {
 	int indexTamanhoAtual;
 	double valor;
 
-	public CalculadoraDeTamanhoDeArquivo(double valor, Tamanhos tamanhoAtual) {
+	public CalculadoraTamanhos(double valor, Tamanhos tamanhoAtual) {
 		this.indexTamanhoAtual = getIndexDeTamanhos(tamanhoAtual);
 		this.valor = valor;
 	}
@@ -20,10 +31,12 @@ class CalculadoraDeTamanhoDeArquivo {
 		int quantidadeOperacoes = Math.abs(indexTamanhoDesejado - this.indexTamanhoAtual);
 		
 		for(int i = 0; i < quantidadeOperacoes; i++) {
-			if (indexTamanhoDesejado > indexTamanhoDesejado) {
+			if (this.indexTamanhoAtual > indexTamanhoDesejado) {
+				this.valor /= 1024;
+			} else if (this.indexTamanhoAtual < indexTamanhoDesejado) 
 				this.valor *= 1024;
-			}
 		}
+		
 		this.indexTamanhoAtual = indexTamanhoDesejado;
 		return this.valor;
 	}
