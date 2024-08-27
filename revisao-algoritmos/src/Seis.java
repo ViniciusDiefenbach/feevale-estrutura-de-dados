@@ -23,10 +23,12 @@ public class Seis {
 			int meio = (inicio + fim) / 2;
 			if (numeroDesejado == vetor[meio])
 				return meio + 1;
-			if (numeroDesejado > vetor[meio])
-				inicio = meio + 1;
-			if (numeroDesejado < vetor[meio])
-				fim = meio - 1;
+			else {
+				if (numeroDesejado > vetor[meio])
+					inicio = meio + 1;
+				else
+					fim = meio - 1;
+			}
 		}
 		return -1;
 	}
